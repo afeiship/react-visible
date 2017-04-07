@@ -48,7 +48,7 @@ export default class ReactVisiable extends PureComponent{
       animating:false
     },()=>{
       !visible && this.setState({hidden:true});
-      this._callback() && (this._callback = noop);
+      this._callback();
     });
   };
 
