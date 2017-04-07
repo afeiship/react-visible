@@ -1,6 +1,7 @@
 // import './style.scss';
 import React,{createElement,PureComponent,PropTypes} from 'react';
 import classNames from 'classnames';
+import noop from 'noop';
 
 export default class ReactVisiable extends PureComponent{
   static propTypes = {
@@ -20,7 +21,7 @@ export default class ReactVisiable extends PureComponent{
       visible:props.visible,
       hidden:!props.visible
     };
-    this._callback = null;
+    this._callback = noop;
   }
 
   show(inCallback){
@@ -52,7 +53,7 @@ export default class ReactVisiable extends PureComponent{
   };
 
   render(){
-    const { visible, animating, hidden} = this.state;
+    const { visible, hidden} = this.state;
     const { nodeName,...props} = this.props;
     delete props.visible;
     const options = Object.assign(props,{
