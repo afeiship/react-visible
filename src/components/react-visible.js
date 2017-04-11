@@ -25,7 +25,7 @@ export default class extends PureComponent{
   }
 
   show(inCallback){
-    this._callback = inCallback;
+    this._callback = inCallback || noop;
     this.setState({ hidden:false, animating:true, visible:false },()=>{
       setTimeout(()=>{
         this.setState({visible:true});
@@ -34,7 +34,7 @@ export default class extends PureComponent{
   }
 
   hide(inCallback){
-    this._callback = inCallback;
+    this._callback = inCallback || noop;
     this.setState({ animating:true },()=>{
       setTimeout(()=>{
         this.setState({visible:false});
