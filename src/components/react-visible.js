@@ -3,7 +3,7 @@ import React,{createElement,PureComponent,PropTypes} from 'react';
 import classNames from 'classnames';
 import noop from 'noop';
 
-export default class ReactVisiable extends PureComponent{
+export default class extends PureComponent{
   static propTypes = {
     nodeName:PropTypes.string,
     visible:PropTypes.bool
