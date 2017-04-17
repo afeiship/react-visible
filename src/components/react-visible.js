@@ -40,8 +40,9 @@ export default class extends PureComponent{
   }
 
   show(inCallback){
+    const {visible} = this.state;
     this._callback = inCallback || noop;
-    this.setState({ hidden:false, animating:true, visible:false },()=>{
+    !visible && this.setState({ hidden:false, animating:true, visible:false },()=>{
       setTimeout(()=>{
         this.mounted && this.setState({visible:true});
       });
@@ -49,8 +50,9 @@ export default class extends PureComponent{
   }
 
   hide(inCallback){
+    const {visible} = this.state;
     this._callback = inCallback || noop;
-    this.setState({ animating:true },()=>{
+    visible && this.setState({ animating:true },()=>{
       setTimeout(()=>{
         this.mounted && this.setState({visible:false});
       });
