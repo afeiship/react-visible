@@ -70,13 +70,12 @@ export default class extends PureComponent{
   };
 
   render(){
-    const { visible, hidden} = this.state;
-    const { nodeName,...props} = this.props;
-    delete props.visible;
+    const { hidden} = this.state;
+    const { nodeName,visible,...props} = this.props;
     const options = Object.assign(props,{
-      'data-visible':visible,
+      'data-visible':this.state.visible,
       hidden,
-      onTransitionEnd:this._onTransitionEnd.bind(this)
+      onTransitionEnd:this._onTransitionEnd
     });
     return createElement(nodeName,options);
   }
