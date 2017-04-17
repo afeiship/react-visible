@@ -58,6 +58,7 @@ export default class ReactVisible extends PureComponent{
 
   _onTransitionEnd = (inEvent) => {
     const {visible}  = this.state;
+    inEvent.persist();
     this.setState({ animating:false },()=>{
       !visible && this.setState({ hidden:true });
       this._callback();
