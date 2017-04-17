@@ -32,7 +32,6 @@ export default class extends PureComponent{
   constructor(props){
     super(props);
     this.state = {
-      animating:false,
       visible:props.visible,
       hidden:!props.visible
     };
@@ -42,9 +41,9 @@ export default class extends PureComponent{
   show(inCallback){
     const {visible} = this.state;
     this._callback = inCallback || noop;
-    !visible && this.setState({ hidden:false, animating:true, visible:false },()=>{
+    !visible && this.setState({ hidden:false },()=>{
       setTimeout(()=>{
-        this.mounted && this.setState({visible:true});
+        this.mounted && this.setState({ visible:true });
       });
     });
   }
@@ -52,28 +51,21 @@ export default class extends PureComponent{
   hide(inCallback){
     const {visible} = this.state;
     this._callback = inCallback || noop;
-    visible && this.setState({ animating:true },()=>{
-      setTimeout(()=>{
-        this.mounted && this.setState({visible:false});
-      });
-    });
+    this.mounted && this.setState({ visible:false });
   }
 
   _onTransitionEnd = () => {
     const {visible}  = this.state;
-    this.setState({
-      animating:false
-    },()=>{
-      !visible && this.setState({hidden:true});
-      this._callback();
-    });
+    !visible && this.setState({ hidden:true });
+    this._callback();
   };
 
   render(){
-    const { hidden} = this.state;
-    const { nodeName,visible,...props} = this.props;
+    const { hidden } = this.state;
+    const { nodeName,visible,...props } = this.props;
     const options = Object.assign(props,{
       'data-visible':this.state.visible,
+      ref:'root',
       hidden,
       onTransitionEnd:this._onTransitionEnd
     });
