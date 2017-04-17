@@ -34,18 +34,18 @@ export default class extends PureComponent{
 
   show(inCallback){
     this._callback = inCallback || noop;
-    this.mounted && this.setState({ hidden:false, animating:true, visible:false },()=>{
+    this.setState({ hidden:false, animating:true, visible:false },()=>{
       setTimeout(()=>{
-        this.setState({visible:true});
+        this.mounted && this.setState({visible:true});
       });
     });
   }
 
   hide(inCallback){
     this._callback = inCallback || noop;
-    this.mounted && this.setState({ animating:true },()=>{
+    this.setState({ animating:true },()=>{
       setTimeout(()=>{
-        this.setState({visible:false});
+        this.mounted && this.setState({visible:false});
       });
     });
   }
