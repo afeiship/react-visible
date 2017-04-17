@@ -14,6 +14,14 @@ export default class extends PureComponent{
     visible:false,
   }
 
+  componentDidMount() {
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   constructor(props){
     super(props);
     this.state = {
@@ -26,7 +34,7 @@ export default class extends PureComponent{
 
   show(inCallback){
     this._callback = inCallback || noop;
-    this.setState({ hidden:false, animating:true, visible:false },()=>{
+    this.mounted && this.setState({ hidden:false, animating:true, visible:false },()=>{
       setTimeout(()=>{
         this.setState({visible:true});
       });
@@ -35,7 +43,7 @@ export default class extends PureComponent{
 
   hide(inCallback){
     this._callback = inCallback || noop;
-    this.setState({ animating:true },()=>{
+    this.mounted && this.setState({ animating:true },()=>{
       setTimeout(()=>{
         this.setState({visible:false});
       });
