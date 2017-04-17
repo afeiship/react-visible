@@ -22,6 +22,13 @@ export default class extends PureComponent{
     this.mounted = false;
   }
 
+  componentWillReceiveProps(nextProps){
+    const visible = nextProps.visible;
+    if(typeof visible === 'boolean'){
+      visible ? this.show() : this.hide();
+    }
+  }
+
   constructor(props){
     super(props);
     this.state = {

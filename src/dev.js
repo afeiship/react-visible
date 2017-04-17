@@ -3,6 +3,9 @@ import ReactVisible from './main';
 
 
 class App extends React.Component{
+  state  = {
+    vv2Visible:false
+  };
   _click1 =()=>{
     // console.log('click1');
     const {vv} = this.refs;
@@ -19,12 +22,21 @@ class App extends React.Component{
     });
   };
 
+  _click3 =()=>{
+    // console.log('click1');
+    const {vv} = this.refs;
+    this.setState({
+      vv2Visible: !this.state.vv2Visible
+    });
+  };
+
   render(){
     return (
       <div className="hello-react-visible">
         <button onClick={this._click1}>Show</button>
         <button onClick={this._click2}>Hide</button>
-        <ReactVisible className="test-vv" ref='vv' visible={false} />
+        <button onClick={this._click3}>Toggle</button>
+        <ReactVisible className="test-vv" ref='vv' visible={this.state.vv2Visible} />
     </div>
     );
   }
