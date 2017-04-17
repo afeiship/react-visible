@@ -36,12 +36,12 @@ export default class extends PureComponent{
       visible:props.visible,
       hidden:!props.visible
     };
-    this._callback = noop;
+    this.__callback = noop;
   }
 
   show(inCallback){
     const {visible} = this.state;
-    this._callback = inCallback || noop;
+    this.__callback = inCallback || noop;
     !visible && this.setState({ animating:true, hidden:false },()=>{
       setTimeout(()=>{
         this.mounted && this.setState({ visible:true });
@@ -51,7 +51,7 @@ export default class extends PureComponent{
 
   hide(inCallback){
     const {visible} = this.state;
-    this._callback = inCallback || noop;
+    this.__callback = inCallback || noop;
     this.mounted && this.setState({ visible:false });
   }
 
@@ -59,7 +59,7 @@ export default class extends PureComponent{
     const {visible}  = this.state;
     this.setState({ animating:false },()=>{
       !visible && this.setState({ hidden:true });
-      this._callback();
+      this.__callback();
     });
   };
 
