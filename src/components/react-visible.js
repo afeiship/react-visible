@@ -39,12 +39,12 @@ export default class ReactVisible extends PureComponent{
     };
 
     //todo:find the bugg!!!!
-    this._callback = noop;
+    ReactVisible._callback = noop;
   }
 
   show(inCallback){
     const {visible} = this.state;
-    this._callback = inCallback || noop;
+    ReactVisible._callback = inCallback || noop;
     !visible && this.setState({ animating:true, hidden:false },()=>{
       setTimeout(()=>{
         this.mounted && this.setState({ visible:true });
@@ -54,7 +54,7 @@ export default class ReactVisible extends PureComponent{
 
   hide(inCallback){
     const {visible} = this.state;
-    this._callback = inCallback || noop;
+    ReactVisible._callback = inCallback || noop;
     this.mounted && this.setState({ visible:false });
   }
 
@@ -62,7 +62,7 @@ export default class ReactVisible extends PureComponent{
     const {visible}  = this.state;
     this.setState({ animating:false },()=>{
       !visible && this.setState({ hidden:true });
-      this._callback();
+      ReactVisible._callback();
     });
   };
 
