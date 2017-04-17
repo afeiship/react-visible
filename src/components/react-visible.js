@@ -38,6 +38,7 @@ export default class ReactVisible extends PureComponent{
       animating:false
     };
     this._callback = noop;
+    this._onTransitionEnd = this._onTransitionEnd.bind(this);
   }
 
   show(inCallback){
@@ -56,9 +57,8 @@ export default class ReactVisible extends PureComponent{
     this.mounted && this.setState({ visible:false });
   }
 
-  _onTransitionEnd = (inEvent) => {
+  _onTransitionEnd() {
     const {visible}  = this.state;
-    inEvent.persist();
     this.setState({ animating:false },()=>{
       !visible && this.setState({ hidden:true });
       this._callback();
