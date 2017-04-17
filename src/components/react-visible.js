@@ -34,7 +34,8 @@ export default class extends PureComponent{
     super(props);
     this.state = {
       visible:props.visible,
-      hidden:!props.visible
+      hidden:!props.visible,
+      animating:false
     };
     this._callback = noop;
   }
