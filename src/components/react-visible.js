@@ -76,7 +76,7 @@ export default class extends PureComponent{
     const options = Object.assign(props,{
       'data-visible':visible,
       hidden,
-      onTransitionEnd:this._onTransitionEnd
+      onTransitionEnd:this._onTransitionEnd.bind(this)
     });
     return createElement(nodeName,options);
   }
