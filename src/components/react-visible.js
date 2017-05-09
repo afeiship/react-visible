@@ -1,5 +1,6 @@
 // import './style.scss';
-import React,{createElement,PureComponent,PropTypes} from 'react';
+import React,{PropTypes, PureComponent, createElement} from 'react';
+
 import classNames from 'classnames';
 import noop from 'noop';
 
@@ -67,11 +68,12 @@ export default class ReactVisible extends PureComponent{
   render(){
     const { hidden } = this.state;
     const { nodeName,visible,animating,...props } = this.props;
-    const options = Object.assign(props,{
+    const options = {
       'data-visible':this.state.visible,
       hidden,
-      onTransitionEnd:this._onTransitionEnd
-    });
+      onTransitionEnd:this._onTransitionEnd,
+      ...props
+    };
     return createElement(nodeName,options);
   }
 }

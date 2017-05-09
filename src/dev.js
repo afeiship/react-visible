@@ -1,6 +1,6 @@
 import './dev.scss';
-import ReactVisible from './main';
 
+import ReactVisible from './main';
 
 class App extends React.Component{
   state  = {
