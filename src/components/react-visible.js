@@ -1,4 +1,3 @@
-// import './style.scss';
 import React,{PropTypes, PureComponent, createElement} from 'react';
 
 import classNames from 'classnames';
@@ -61,7 +60,9 @@ export default class ReactVisible extends PureComponent{
     const {visible}  = this.state;
     this.setState({ animating:false },()=>{
       !visible && this.setState({ hidden:true });
-      this._callback && this._callback();
+      if(this._callback && typeof this._callback==='function'){
+        this._callback();
+      }
     });
   };
 
