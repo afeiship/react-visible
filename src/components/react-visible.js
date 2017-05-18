@@ -1,5 +1,6 @@
-import React,{PropTypes, PureComponent, createElement} from 'react';
+import React,{PureComponent, createElement} from 'react';
 
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
 
