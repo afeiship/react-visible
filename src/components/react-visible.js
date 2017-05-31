@@ -26,8 +26,13 @@ export default class ReactVisible extends PureComponent{
 
   componentWillReceiveProps(nextProps){
     const visible = nextProps.visible;
+    const hidden = nextProps.hidden;
     if(typeof visible === 'boolean'){
       visible ? this.show() : this.hide();
+    }
+
+    if(typeof hidden === 'boolean'){
+      this.setState({hidden})
     }
   }
 
