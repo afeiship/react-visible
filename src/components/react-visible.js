@@ -30,10 +30,6 @@ export default class ReactVisible extends PureComponent{
     if(typeof visible === 'boolean'){
       visible ? this.show() : this.hide();
     }
-
-    if(typeof hidden === 'boolean'){
-      this.setState({hidden})
-    }
   }
 
   constructor(props){
@@ -57,9 +53,14 @@ export default class ReactVisible extends PureComponent{
   }
 
   hide(inCallback){
-    const {visible} = this.state;
+    const {visible,animating} = this.state;
     this._callback = inCallback;
-    this.mounted && this.setState({ visible:false,hidden:true });
+    if(this.mounted){
+      this.setState({ visible:false });
+      if(animating){
+        this.setState({hidden:true});
+      }
+    }
   }
 
   _onTransitionEnd = (inEvent) => {
