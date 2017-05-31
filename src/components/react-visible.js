@@ -59,7 +59,7 @@ export default class ReactVisible extends PureComponent{
   hide(inCallback){
     const {visible} = this.state;
     this._callback = inCallback;
-    this.mounted && this.setState({ visible:false,hidden:false });
+    this.mounted && this.setState({ visible:false,hidden:true });
   }
 
   _onTransitionEnd = (inEvent) => {
