@@ -6,6 +6,11 @@ class App extends React.Component{
   state  = {
     vv2Visible:false
   };
+
+  componentDidMount(){
+    window.vv = this;
+  }
+
   _click1 =()=>{
     // console.log('click1');
     const {vv} = this.refs;
