@@ -53,6 +53,7 @@ export default class ReactVisible extends PureComponent{
   show(inCallback){
     const {visible} = this.state;
     this._callback = inCallback;
+    console.log('visleble show:visible_value:::',visible)
     !visible && this.setState({ animating:true, hidden:false },()=>{
       setTimeout(()=>{
         this.mounted && this.setState({ visible:true });
@@ -65,7 +66,7 @@ export default class ReactVisible extends PureComponent{
     this._callback = inCallback;
     if(this.mounted){
       this.setState({ visible:false },()=>{
-        animating && this.setState({hidden:true , animating: false},()=>{
+        animating && this.setState({hidden:true , animating:false},()=>{
           this.execCallback();
         });
       });
