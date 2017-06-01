@@ -64,7 +64,7 @@ export default class ReactVisible extends PureComponent{
     this._callback = inCallback;
     if(this.mounted){
       clearTimeout(this._timer);
-      setTimeout(()=>{
+      this._timer = setTimeout(()=>{
         this.setState({ visible:false },()=>{
           if(animating){
             this.setState({animating:false,hidden:true})
