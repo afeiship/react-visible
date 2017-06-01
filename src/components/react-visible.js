@@ -65,7 +65,7 @@ export default class ReactVisible extends PureComponent{
     if(this.mounted){
       this.setState({ visible:false });
       if(animating){
-        this.setState({ hidden: true });
+        this.setState({ hidden: true, animating:false });
       }
     }
   }
