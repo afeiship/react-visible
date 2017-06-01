@@ -53,7 +53,7 @@ export default class ReactVisible extends PureComponent{
   }
 
   execCallback(){
-    if(this._callback && typeof this._callback==='function'){
+    if(this._callback && typeof this._callback === 'function'){
       this._callback();
     }
   }
@@ -64,7 +64,7 @@ export default class ReactVisible extends PureComponent{
     if(this.mounted){
       this.setState({ visible:false });
       if(animating){
-        this.setState({hidden:true , animating: false},()=>{
+        !visible && this.setState({hidden:true , animating: false},()=>{
           this.execCallback();
         });
       }
