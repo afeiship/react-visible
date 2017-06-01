@@ -52,9 +52,9 @@ export default class ReactVisible extends PureComponent{
     const {visible} = this.state;
     this._callback = inCallback;
     !visible && this.setState({ animating:true, hidden:false },()=>{
-      clearTimeout(this._timer);
       this._timer = setTimeout(()=>{
-        this.mounted && this._timer && this.setState({ visible:true });
+        this.mounted && this.setState({ visible:true });
+        clearTimeout(this._timer);
       });
     });
   }
@@ -64,6 +64,10 @@ export default class ReactVisible extends PureComponent{
     this._callback = inCallback;
     if(this.mounted){
       this.setState({ visible:false });
+      if(this._timer){
+        this.setState({ hidden: true });
+        clearTimeout(this._timer);
+      }
     }
   }
 
