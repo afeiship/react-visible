@@ -62,12 +62,11 @@ export default class ReactVisible extends PureComponent{
     const {visible,animating} = this.state;
     this._callback = inCallback;
     if(this.mounted){
-      this.setState({ visible:false });
-      if(animating){
-        !visible && this.setState({hidden:true , animating: false},()=>{
+      this.setState({ visible:false },()=>{
+        animating && this.setState({hidden:true , animating: false},()=>{
           this.execCallback();
         });
-      }
+      });
     }
   }
 
