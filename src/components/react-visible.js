@@ -42,6 +42,12 @@ export default class ReactVisible extends PureComponent{
     this._callback = null;
   }
 
+  execCallback(){
+    if(this._callback && typeof this._callback === 'function'){
+      this._callback();
+    }
+  }
+
   show(inCallback){
     const {visible} = this.state;
     this._callback = inCallback;
@@ -52,17 +58,11 @@ export default class ReactVisible extends PureComponent{
     });
   }
 
-  execCallback(){
-    if(this._callback && typeof this._callback === 'function'){
-      this._callback();
-    }
-  }
-
   hide(inCallback){
     const {visible,animating} = this.state;
     this._callback = inCallback;
     if(this.mounted){
-      visible && this.setState({ visible:false },()=>{
+      this.setState({ visible:false },()=>{
         animating && this.setState({hidden:true , animating: false},()=>{
           this.execCallback();
         });
