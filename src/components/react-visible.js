@@ -52,13 +52,21 @@ export default class ReactVisible extends PureComponent{
     });
   }
 
+  execCallback(){
+    if(this._callback && typeof this._callback==='function'){
+      this._callback();
+    }
+  }
+
   hide(inCallback){
     const {visible,animating} = this.state;
     this._callback = inCallback;
     if(this.mounted){
       this.setState({ visible:false });
       if(animating){
-        this.setState({hidden:true , animating: false});
+        this.setState({hidden:true , animating: false},()=>{
+          this.execCallback();
+        });
       }
     }
   }
@@ -67,9 +75,7 @@ export default class ReactVisible extends PureComponent{
     const {visible}  = this.state;
     this.setState({ animating:false },()=>{
       !visible && this.setState({ hidden:true });
-      if(this._callback && typeof this._callback==='function'){
-        this._callback();
-      }
+      this.execCallback();
     });
   };
 
