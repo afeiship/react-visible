@@ -8,13 +8,13 @@ export default class ReactVisible extends PureComponent{
   static propTypes = {
     nodeName:PropTypes.string,
     visible:PropTypes.bool
-  }
+  };
 
   static defaultProps = {
     nodeName:'div',
     visible:false,
     animating:false
-  }
+  };
 
   componentDidMount() {
     this.mounted = true;
