@@ -48,28 +48,32 @@ export default class ReactVisible extends PureComponent{
     }
   }
 
-  show(inCallback){
+  show(){
     const {visible} = this.state;
-    this._callback = inCallback;
     this.setState({ animating:true, hidden:false },()=>{
       this._timer = setTimeout(()=>{
         this.mounted && !this.state.visible && this.setState({ visible:true });
         clearTimeout(this._timer);
       });
     });
+    return this;
   }
 
-  hide(inCallback){
+  hide(){
     const {visible,animating,hidden} = this.state;
-    this._callback = inCallback;
     if(this.mounted){
       this.setState({ visible:false });
-      if(visible && animating && !hidden){
+      if(animating && !hidden){
         this.setState({ hidden: true, animating:false },()=>{
           this.execCallback();
         });
       }
     }
+    return this;
+  }
+
+  then(inCallback){
+    this._callback = inCallback;
   }
 
   _onTransitionEnd = (inEvent) => {

@@ -14,7 +14,7 @@ class App extends React.Component{
   _click1 =()=>{
     // console.log('click1');
     const {vv} = this.refs;
-    vv.show(()=>{
+    vv.show().then(()=>{
       console.log('show!!!');
     });
   };
@@ -22,7 +22,7 @@ class App extends React.Component{
   _click2 =()=>{
     // console.log('click1');
     const {vv} = this.refs;
-    vv.hide(()=>{
+    vv.hide().then(()=>{
       console.log('hidden!!!');
     });
   };
