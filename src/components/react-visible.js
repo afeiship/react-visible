@@ -45,6 +45,7 @@ export default class ReactVisible extends PureComponent{
   execCallback(){
     if(this._callback && typeof this._callback === 'function'){
       this._callback();
+      this._callback = null;
     }
   }
 
