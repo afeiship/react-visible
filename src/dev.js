@@ -1,52 +1,32 @@
 import './dev.scss';
-
 import ReactVisible from './main';
 
+/*===example start===*/
+
+// install: npm install afeiship/react-visible --save
+// import : import ReactVisible from 'react-visible'
+
 class App extends React.Component{
-  state  = {
-    vv2Visible:false
+  state = {
+
   };
 
-  componentDidMount(){
-    window.vv = this;
+  constructor(props){
+    super(props);
+    window.demo = this;
+    window.refs = this.refs;
+    window.rc = this.refs.rc;
   }
-
-  _click1 =()=>{
-    // console.log('click1');
-    const {vv} = this.refs;
-    vv.show().then(()=>{
-      console.log('show!!!');
-    });
-  };
-
-  _click2 =()=>{
-    // console.log('click1');
-    const {vv} = this.refs;
-    vv.hide().then(()=>{
-      console.log('hidden!!!');
-    });
-  };
-
-  _click3 =()=>{
-    // console.log('click1');
-    const {vv} = this.refs;
-    this.setState({
-      vv2Visible: !this.state.vv2Visible
-    });
-  };
 
   render(){
     return (
       <div className="hello-react-visible">
-        <button onClick={this._click1}>Show</button>
-        <button onClick={this._click2}>Hide</button>
-        <button onClick={this._click3}>Toggle</button>
-        <ReactVisible className="test-vv" ref='vv' visible={this.state.vv2Visible} />
-    </div>
+        <ReactVisible ref='rc' />
+      </div>
     );
   }
 }
-
+/*===example end===*/
 
 ReactDOM.render(
     <App />,

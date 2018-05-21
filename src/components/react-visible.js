@@ -1,99 +1,80 @@
-import React,{PureComponent, createElement} from 'react';
-
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
+import objectAssign from 'object-assign';
+import 'next-return-event';
 
-export default class ReactVisible extends PureComponent{
+const IMPL_ERROR_MSG = 'Render method must be implement!';
+
+export default class ReactBackdrop extends Component {
+  /*===properties start===*/
   static propTypes = {
-    nodeName:PropTypes.string,
-    visible:PropTypes.bool
+    value: PropTypes.bool,
+    onChange: PropTypes.func
   };
 
   static defaultProps = {
-    nodeName:'div',
-    visible:false,
-    animating:false
+    value: false,
+    onChange: noop,
   };
+  /*===properties end===*/
 
-  componentDidMount() {
-    this.mounted = true;
+  constructor(inProps) {
+    super(inProps);
+    const { value } = inProps;
+    this.state = {
+      value,
+      hidden: !value
+    };
+    this._callback = noop;
+  }
+
+  componentWillReceiveProps(inProps) {
+    const { value } = inProps;
+    if (value !== this.state.value) {
+      this.visible(value);
+    }
   }
 
   componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  componentWillReceiveProps(nextProps){
-    const visible = nextProps.visible;
-    const hidden = nextProps.hidden;
-    if(typeof visible === 'boolean'){
-      visible ? this.show() : this.hide();
-    }
-  }
-
-  constructor(props){
-    super(props);
-    this.state = {
-      visible:props.visible,
-      hidden:!props.visible,
-      animating:false
-    };
     this._callback = null;
   }
 
-  execCallback(){
-    if(this._callback && typeof this._callback === 'function'){
-      this._callback();
-      this._callback = null;
-    }
-  }
-
-  show(){
-    const {visible} = this.state;
-    this.setState({ animating:true, hidden:false },()=>{
-      this._timer = setTimeout(()=>{
-        this.mounted && !this.state.visible && this.setState({ visible:true });
-        clearTimeout(this._timer);
-      });
-    });
-    return this;
-  }
-
-  hide(){
-    const {visible,animating,hidden} = this.state;
-    if(this.mounted){
-      this.setState({ visible:false });
-      if(animating && !hidden){
-        this.setState({ hidden: true, animating:false },()=>{
-          this.execCallback();
-        });
-      }
-    }
-    return this;
-  }
-
-  then(inCallback){
+  then(inCallback) {
     this._callback = inCallback;
   }
 
-  _onTransitionEnd = (inEvent) => {
-    const {visible,animating}  = this.state;
-    this.setState({ animating:false },()=>{
-      !visible && this.setState({ hidden:true });
-      this.execCallback();
-    });
+  show() {
+    this.setState({ hidden: false, value: true });
+    return this;
+  }
+
+  hide() {
+    this.setState({ value: false });
+    return this;
+  }
+
+  visible(inValue) {
+    return inValue ? this.show() : this.hide();
+  }
+
+  toggle() {
+    const { value } = this.state;
+    return this.visible(!value);
+  }
+
+  onAnimationEnd = e => {
+    const { value } = this.state;
+    const target = nx.returnEventTarget(value);
+    !value && this.setState({ hidden: true });
+    this.props.onChange(target);
+    this._callback(target);
   };
 
-  render(){
-    const { hidden } = this.state;
-    const { nodeName,visible,animating,...props } = this.props;
-    const options = {
-      'data-visible':this.state.visible,
-      hidden,
-      onTransitionEnd:this._onTransitionEnd,
-      ...props
-    };
-    return createElement(nodeName,options);
+  render() {
+    throw new Error(IMPL_ERROR_MSG);
+    return null;
   }
 }
