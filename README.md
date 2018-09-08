@@ -1,17 +1,26 @@
-# react-visible [FOR IMPLEMENT]
-> React component for visible element
+# react-visible
+> React component for visible element. [FOR IMPLEMENT]
 
 ## properties:
 ```javascript
 
   static propTypes = {
+    className: PropTypes.string,
     value: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    destroyable: PropTypes.bool,
+    backdrop: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.object
+    ])
   };
 
   static defaultProps = {
+    className: '',
     value: false,
     onChange: noop,
+    backdrop: true,
+    destroyable: false
   };
   
 ```
@@ -62,5 +71,3 @@ class App extends React.Component{
 }
 
 ```
-
-

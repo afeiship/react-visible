@@ -1,5 +1,5 @@
-# react-visible [FOR IMPLEMENT]
-> React component for visible element
+# react-visible
+> React component for visible element. [FOR IMPLEMENT]
 
 ## properties:
 ```javascript
@@ -28,5 +28,3 @@ $react-visible-options:(
 ```jsx
 BACKUP_USAGE
 ```
-
-

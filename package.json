@@ -1,6 +1,6 @@
 {
   "name": "react-visible",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "description": "React component for visible element",
   "author": "afeiship <1290657123@qq.com>",
   "keywords": [
@@ -64,6 +64,8 @@
     "node-sass": "^3.13.0",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "sass-loader": "^4.0.2",
     "semver": "^5.3.0",
@@ -85,11 +87,8 @@
     "classnames": "^2.2.5",
     "mixin-decorator": "github:afeiship/mixin-decorator",
     "next-dom-event": "github:afeiship/next-dom-event",
-    "next-return-event": "github:afeiship/next-return-event",
     "noop": "github:afeiship/noop",
     "prop-types": "^15.5.10",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
     "object-assign": "^4.1.1"
   }
 }

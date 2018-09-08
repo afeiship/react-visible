@@ -1,5 +1,12 @@
 *{margin: 0;padding:0;box-sizing: border-box;}
 ul,li{list-style: none;}
+button{
+  border: none;
+  background: no-clip;
+  &:focus{
+    outline: none;
+  }
+}
 
 @import './components/style.scss';
 
@@ -8,7 +15,7 @@ ul,li{list-style: none;}
   color:#F00;
   padding:50px 20px;
 
-  button{
+  .button{
     border: none;
     display: block;
     width:100%;
