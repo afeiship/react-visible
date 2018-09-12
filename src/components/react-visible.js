@@ -84,12 +84,16 @@ export default class extends React.Component {
     });
   }
 
-  onAnimationEnd = () => {
+  onAnimationEnd() {
     const { value } = this.state;
     const { onChange } = this.props;
     !value && this.setState({ hidden: true });
     this.updateDestroyValue();
     onChange({ target: { value } });
+  }
+
+  _onAnimationEnd = (inEvent) =>{
+    this.onAnimationEnd();
   };
 
   render() {
