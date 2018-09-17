@@ -87,7 +87,7 @@ export default class extends React.Component {
     });
   }
 
-  onAnimationEnd() {
+  onAnimationEnd(inEvent) {
     const { value } = this.state;
     const { onChange } = this.props;
     !value && this.setState({ hidden: true });
@@ -96,7 +96,7 @@ export default class extends React.Component {
   }
 
   _onAnimationEnd = (inEvent) =>{
-    this.onAnimationEnd();
+    this.onAnimationEnd(inEvent);
   };
 
   render() {
