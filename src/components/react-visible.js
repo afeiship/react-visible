@@ -56,7 +56,10 @@ export default class extends React.Component {
       hidden: !value,
       destroyValue: true
     };
+    this.componentDidInit();
   }
+
+  componentDidInit(){}
 
   componentWillReceiveProps(inProps) {
     const { value } = inProps;
