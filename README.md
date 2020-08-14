@@ -12,11 +12,12 @@ npm update @feizheng/react-visible
 ```
 
 ## properties
-| Name      | Type   | Required | Default | Description                           |
-| --------- | ------ | -------- | ------- | ------------------------------------- |
-| className | string | false    | -       | The extended className for component. |
-| value     | object | false    | null    | Default value.                        |
-| onChange  | func   | false    | noop    | The change handler.                   |
+| Name        | Type   | Required | Default | Description                                 |
+| ----------- | ------ | -------- | ------- | ------------------------------------------- |
+| className   | string | false    | -       | The extended className for component.       |
+| value       | bool   | false    | -       | Abstract visible value.                     |
+| onChange    | func   | false    | noop    | The change handler.                         |
+| destroyable | bool   | false    | false   | If element destroyed when visible to false. |
 
 
 ## usage
@@ -34,12 +35,68 @@ npm update @feizheng/react-visible
   import React from 'react';
   import './assets/style.scss';
 
+  class Backdrop extends ReactVisible {
+    get visibleElementView() {
+      const { className, destroyable, value, ...props } = this.props;
+      const { hidden } = this.state;
+
+      return (
+        <div
+          data-position="absolute"
+          data-component={'backdrop'}
+          hidden={hidden}
+          data-visible={this.state.value}
+          hidden={hidden}
+          className={`webkit-sassui-backdrop ${className}`}
+          onAnimationEnd={this.handleAnimationEnd}
+          {...props}
+        />
+      );
+    }
+  }
+
   class App extends React.Component {
-    componentDidMount() {}
+    state = {
+      value: false
+    };
+
     render() {
       return (
         <div className="app-container">
-          <ReactVisible />
+          <button
+            className="button"
+            onClick={(e) => {
+              this.el.present();
+            }}>
+            Button Open
+          </button>
+
+          <button
+            className="button"
+            onClick={(e) => {
+              this.el.dismiss();
+            }}>
+            Button Close
+          </button>
+          <Backdrop
+            ref={(el) => (this.el = el)}
+            className="red-bg"
+          />
+
+          <Backdrop
+            value={this.state.value}
+            onChange={(e) => {
+              this.setState({ value: e.target.value });
+            }}
+          />
+
+          <button
+            className="button"
+            onClick={(e) => {
+              this.setState({ value: !this.state.value });
+            }}>
+            Toggle
+          </button>
         </div>
       );
     }
