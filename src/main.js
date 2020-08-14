@@ -1,2 +1,2 @@
-import ReactVisible from 'components/react-visible';
+import ReactVisible from './components';
 export default ReactVisible;

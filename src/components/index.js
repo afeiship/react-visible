@@ -2,49 +2,40 @@ import React, { Fragment, Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import noop from 'noop';
+import noop from '@feizheng/noop';
 
-const OBJECT = 'object';
-const EMPTY_OBJECT = {};
+const CLASS_NAME = 'react-visible';
+const UNDEFINED = 'undefined';
 
-export default class extends React.Component {
-  /*===properties start===*/
+export default class ReactVisible extends Component {
+  static displayName = CLASS_NAME;
+  static version = '__VERSION__';
   static propTypes = {
+    /**
+     * The extended className for component.
+     */
     className: PropTypes.string,
+    /**
+     * Abstract visible value.
+     */
     value: PropTypes.bool,
+    /**
+     * The change handler.
+     */
     onChange: PropTypes.func,
-    destroyable: PropTypes.bool,
-    backdrop: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.object
-    ])
+    /**
+     * If element destroyed when visible to false.
+     */
+    destroyable: PropTypes.bool
   };
 
   static defaultProps = {
-    className: '',
-    value: false,
     onChange: noop,
-    backdrop: true,
     destroyable: false
   };
-  /*===properties end===*/
-
-  get backdropView() {
-    const { backdrop } = this.props;
-    const { value, hidden } = this.state;
-    const bakcdropProps = typeof backdrop === OBJECT ? backdrop : EMPTY_OBJECT;
-
-    return !!backdrop && (
-      <div
-        hidden={hidden}
-        data-visible={value}
-        className="webkit-sassui-backdrop"
-        {...bakcdropProps}
-      />
-    );
-  }
 
   get visibleElementView() {
+    // @template: need to implement.
     return null;
   }
 
@@ -56,23 +47,22 @@ export default class extends React.Component {
       hidden: !value,
       destroyValue: true
     };
-    this.componentDidInit();
   }
 
-  componentDidInit(){}
-
-  componentWillReceiveProps(inProps) {
-    const { value } = inProps;
+  shouldComponentUpdate(inNextProps) {
+    const { value } = inNextProps;
+    if (typeof value === UNDEFINED) return true;
     if (value !== this.state.value) {
       if (value) {
-        this.setState({ hidden: false })
+        this.setState({ hidden: false });
       }
       this.setState({ value });
     }
+    return true;
   }
 
   present() {
-    this.setState({ destroyValue: true, hidden: false, value: true })
+    this.setState({ destroyValue: true, hidden: false, value: true });
   }
 
   dismiss() {
@@ -87,7 +77,7 @@ export default class extends React.Component {
     });
   }
 
-  onAnimationEnd(inEvent) {
+  animationEnd() {
     const { value } = this.state;
     const { onChange } = this.props;
     !value && this.setState({ hidden: true });
@@ -95,18 +85,12 @@ export default class extends React.Component {
     onChange({ target: { value } });
   }
 
-  _onAnimationEnd = (inEvent) =>{
-    this.onAnimationEnd(inEvent);
+  handleAnimationEnd = (inEvent) => {
+    this.animationEnd(inEvent);
   };
 
   render() {
     const { destroyValue } = this.state;
-    return (
-      destroyValue && <Fragment>
-        {this.visibleElementView}
-        {this.backdropView}
-      </Fragment>
-    );
+    return destroyValue && <Fragment>{this.visibleElementView}</Fragment>;
   }
 }
-
