@@ -36,9 +36,3 @@ body,
     }
   }
 }
-
-.red-bg {
-  &[data-visible="true"] {
-    background: rgba(#f00, 0.9);
-  }
-}

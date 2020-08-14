@@ -48,7 +48,6 @@ class App extends React.Component {
         </button>
         <Backdrop
           ref={(el) => (this.el = el)}
-          className="red-bg"
         />
 
         <Backdrop

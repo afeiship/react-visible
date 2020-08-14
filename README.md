@@ -80,7 +80,6 @@ npm update @feizheng/react-visible
           </button>
           <Backdrop
             ref={(el) => (this.el = el)}
-            className="red-bg"
           />
 
           <Backdrop
