@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-visible",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component for visible element.",
   "main": "dist/index.js",
   "scripts": {

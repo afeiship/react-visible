@@ -46,12 +46,11 @@ class App extends React.Component {
           }}>
           Button Close
         </button>
-        <Backdrop
-          ref={(el) => (this.el = el)}
-        />
+        <Backdrop ref={(el) => (this.el = el)} />
 
         <Backdrop
           value={this.state.value}
+          destroyable
           onChange={(e) => {
             this.setState({ value: e.target.value });
           }}

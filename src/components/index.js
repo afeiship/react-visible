@@ -55,6 +55,7 @@ export default class ReactVisible extends Component {
     if (value !== this.state.value) {
       if (value) {
         this.setState({ hidden: false });
+        this.updateDestroyValue(value);
       }
       this.setState({ value });
     }
@@ -69,11 +70,10 @@ export default class ReactVisible extends Component {
     this.setState({ value: false });
   }
 
-  updateDestroyValue() {
+  updateDestroyValue(inValue) {
     const { destroyable } = this.props;
-    const { value } = this.state;
     this.setState({
-      destroyValue: destroyable ? value : true
+      destroyValue: destroyable ? inValue : true
     });
   }
 
@@ -81,7 +81,7 @@ export default class ReactVisible extends Component {
     const { value } = this.state;
     const { onChange } = this.props;
     !value && this.setState({ hidden: true });
-    this.updateDestroyValue();
+    this.updateDestroyValue(value);
     onChange({ target: { value } });
   }
 
