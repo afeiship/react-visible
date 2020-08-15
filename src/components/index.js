@@ -40,12 +40,12 @@ export default class ReactVisible extends Component {
   }
 
   constructor(inProps) {
-    const { value } = inProps;
+    const { destroyable, value } = inProps;
     super(inProps);
     this.state = {
       value,
       hidden: !value,
-      destroyValue: true
+      destroyValue: destroyable ? value : true
     };
   }
 

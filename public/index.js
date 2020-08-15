@@ -52,6 +52,7 @@ class App extends React.Component {
           value={this.state.value}
           destroyable
           onChange={(e) => {
+            console.log('e.target.value:', e.target.value);
             this.setState({ value: e.target.value });
           }}
         />
