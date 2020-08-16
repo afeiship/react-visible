@@ -91,6 +91,7 @@ export default class ReactVisible extends Component {
 
   render() {
     const { destroyValue } = this.state;
-    return destroyValue && <Fragment>{this.visibleElementView}</Fragment>;
+    if (!destroyValue) return null;
+    return <Fragment>{this.visibleElementView}</Fragment>;
   }
 }
