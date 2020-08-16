@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@feizheng/noop';
+import ReactAppendToDocument from '@feizheng/react-append-to-document';
 
 const CLASS_NAME = 'react-visible';
 const UNDEFINED = 'undefined';
@@ -24,6 +25,14 @@ export default class ReactVisible extends Component {
      */
     onChange: PropTypes.func,
     /**
+     * The handler when present.
+     */
+    onPresent: PropTypes.func,
+    /**
+     * The handler when dismiss.
+     */
+    onDismiss: PropTypes.func,
+    /**
      * If element destroyed when visible to false.
      */
     destroyable: PropTypes.bool
@@ -31,8 +40,16 @@ export default class ReactVisible extends Component {
 
   static defaultProps = {
     onChange: noop,
+    onPresent: noop,
+    onDismiss: noop,
     destroyable: false
   };
+
+  static create(inComponent, inProps) {
+    return ReactAppendToDocument.append(inComponent, inProps, {
+      className: 'react-visible-root-container'
+    });
+  }
 
   get visibleElementView() {
     // @template: need to implement.
@@ -40,8 +57,10 @@ export default class ReactVisible extends Component {
   }
 
   constructor(inProps) {
-    const { destroyable, value } = inProps;
+    const { destroyable, value, onPresent, onDismiss } = inProps;
     super(inProps);
+    this.onPresent = onPresent;
+    this.onDismiss = onDismiss;
     this.state = {
       value,
       hidden: !value,
@@ -62,12 +81,23 @@ export default class ReactVisible extends Component {
     return true;
   }
 
-  present() {
-    this.setState({ destroyValue: true, hidden: false, value: true });
+  present(inCallback, inOptions) {
+    const { onPresent } = this.props;
+    const runtime = {
+      destroyValue: true,
+      hidden: false,
+      value: true,
+      ...inOptions
+    };
+    this.setState(runtime);
+    this.onPresent = inCallback || onPresent;
   }
 
-  dismiss() {
-    this.setState({ value: false });
+  dismiss(inCallback, inOptions) {
+    const { onDismiss } = this.props;
+    const runtime = { value: false, ...inOptions };
+    this.setState(runtime);
+    this.onDismiss = inCallback || onDismiss;
   }
 
   updateDestroyValue(inValue) {
@@ -83,6 +113,8 @@ export default class ReactVisible extends Component {
     !value && this.setState({ hidden: true });
     this.updateDestroyValue(value);
     onChange({ target: { value } });
+    value && this.onPresent();
+    !value && this.onDismiss();
   }
 
   handleAnimationEnd = (inEvent) => {

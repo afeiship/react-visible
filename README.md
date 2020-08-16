@@ -17,6 +17,8 @@ npm update @feizheng/react-visible
 | className   | string | false    | -       | The extended className for component.       |
 | value       | bool   | false    | -       | Abstract visible value.                     |
 | onChange    | func   | false    | noop    | The change handler.                         |
+| onPresent   | func   | false    | noop    | The handler when present.                   |
+| onDismiss   | func   | false    | noop    | The handler when dismiss.                   |
 | destroyable | bool   | false    | false   | If element destroyed when visible to false. |
 
 
@@ -30,14 +32,21 @@ npm update @feizheng/react-visible
   ```
 2. import js
   ```js
-  import ReactVisible from '@feizheng/react-visible';
+  import ReactVisible, { ReactVisibleController } from '@feizheng/react-visible';
   import ReactDOM from 'react-dom';
   import React from 'react';
   import './assets/style.scss';
 
   class Backdrop extends ReactVisible {
     get visibleElementView() {
-      const { className, destroyable, value, ...props } = this.props;
+      const {
+        className,
+        destroyable,
+        value,
+        onPresent,
+        onDismiss,
+        ...props
+      } = this.props;
       const { hidden } = this.state;
 
       return (
@@ -59,6 +68,12 @@ npm update @feizheng/react-visible
     state = {
       value: false
     };
+
+    componentDidMount() {
+      this.appBackdrop = new ReactVisibleController(Backdrop, {
+        destroyable: true
+      });
+    }
 
     render() {
       return (
@@ -95,6 +110,22 @@ npm update @feizheng/react-visible
               this.setState({ value: !this.state.value });
             }}>
             Toggle
+          </button>
+
+          <button
+            className="button"
+            onClick={(e) => {
+              this.appBackdrop.present();
+            }}>
+            App backdrop Show
+          </button>
+
+          <button
+            className="button"
+            onClick={(e) => {
+              this.appBackdrop.dismiss();
+            }}>
+            App backdrop Hide
           </button>
         </div>
       );
