@@ -81,7 +81,7 @@ class App extends React.Component {
         <button
           className="button"
           onClick={(e) => {
-            this.appBackdrop.present(null, () => {
+            this.appBackdrop.present(() => {
               console.log('after present!');
             });
           }}>
@@ -91,7 +91,7 @@ class App extends React.Component {
         <button
           className="button"
           onClick={(e) => {
-            this.appBackdrop.dismiss(null, () => {
+            this.appBackdrop.dismiss(() => {
               console.log('after dismiss');
             });
           }}>

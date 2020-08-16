@@ -8,11 +8,11 @@ export default class {
     });
   }
 
-  present(inOptions, inCallback) {
+  present(inCallback, inOptions) {
     this.instance.component.present(inCallback, inOptions);
   }
 
-  dismiss(inOptions, inCallback) {
+  dismiss(inCallback, inOptions) {
     this.instance.component.dismiss(inCallback, inOptions);
   }
 
