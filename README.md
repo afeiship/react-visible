@@ -115,7 +115,9 @@ npm update @feizheng/react-visible
           <button
             className="button"
             onClick={(e) => {
-              this.appBackdrop.present();
+              this.appBackdrop.present(null, () => {
+                console.log('after present!');
+              });
             }}>
             App backdrop Show
           </button>
@@ -123,7 +125,9 @@ npm update @feizheng/react-visible
           <button
             className="button"
             onClick={(e) => {
-              this.appBackdrop.dismiss();
+              this.appBackdrop.dismiss(null, () => {
+                console.log('after dismiss');
+              });
             }}>
             App backdrop Hide
           </button>
