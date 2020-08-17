@@ -57,12 +57,13 @@ export default class ReactVisible extends Component {
   }
 
   constructor(inProps) {
-    const { destroyable, value, onPresent, onDismiss } = inProps;
+    const { destroyable, value, onPresent, onDismiss, onChange } = inProps;
     super(inProps);
-    this.onPresent = onPresent;
-    this.onDismiss = onDismiss;
     this.state = {
       value,
+      onPresent,
+      onDismiss,
+      onChange,
       hidden: !value,
       destroyValue: destroyable ? value : true
     };
@@ -82,22 +83,23 @@ export default class ReactVisible extends Component {
   }
 
   present(inCallback, inOptions) {
-    const { onPresent } = this.props;
-    const runtime = {
+    const onPresent = inCallback || this.state.onPresent;
+    this.setState({
       destroyValue: true,
       hidden: false,
       value: true,
+      onPresent,
       ...inOptions
-    };
-    this.setState(runtime);
-    this.onPresent = inCallback || onPresent;
+    });
   }
 
   dismiss(inCallback, inOptions) {
-    const { onDismiss } = this.props;
-    const runtime = { value: false, ...inOptions };
-    this.setState(runtime);
-    this.onDismiss = inCallback || onDismiss;
+    const onDismiss = inCallback || this.state.onDismiss;
+    this.setState({
+      value: false,
+      onDismiss,
+      ...inOptions
+    });
   }
 
   updateDestroyValue(inValue) {
@@ -108,13 +110,12 @@ export default class ReactVisible extends Component {
   }
 
   animationEnd() {
-    const { value } = this.state;
-    const { onChange } = this.props;
+    const { value, onPresent, onDismiss, onChange } = this.state;
     !value && this.setState({ hidden: true });
     this.updateDestroyValue(value);
+    value && onPresent();
+    !value && onDismiss();
     onChange({ target: { value } });
-    value && this.onPresent();
-    !value && this.onDismiss();
   }
 
   handleAnimationEnd = (inEvent) => {
