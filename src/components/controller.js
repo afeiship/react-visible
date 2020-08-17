@@ -3,8 +3,8 @@ import ReactVisible from './index';
 export default class {
   constructor(inComponent, inProps) {
     ReactVisible.create(inComponent, inProps).then((instance) => {
-      this.instance = this.instance || instance;
-      this.component = this.instance.component;
+      this.instance = instance;
+      this.component = instance.component;
     });
   }
 
