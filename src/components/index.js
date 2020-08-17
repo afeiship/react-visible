@@ -46,6 +46,8 @@ export default class ReactVisible extends Component {
     destroyable: false
   };
 
+  static VISIBLE_ROOT_CLASS = VISIBLE_ROOT_CLASS;
+
   static create(inComponent, inProps) {
     return ReactAppendToDocument.append(inComponent, inProps, {
       className: VISIBLE_ROOT_CLASS
