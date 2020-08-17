@@ -7,6 +7,7 @@ import ReactAppendToDocument from '@feizheng/react-append-to-document';
 
 const CLASS_NAME = 'react-visible';
 const UNDEFINED = 'undefined';
+const VISIBLE_ROOT_CLASS = 'react-visible-root-container';
 
 export default class ReactVisible extends Component {
   static displayName = CLASS_NAME;
@@ -47,7 +48,7 @@ export default class ReactVisible extends Component {
 
   static create(inComponent, inProps) {
     return ReactAppendToDocument.append(inComponent, inProps, {
-      className: 'react-visible-root-container'
+      className: VISIBLE_ROOT_CLASS
     });
   }
 
