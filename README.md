@@ -16,10 +16,10 @@ npm update @feizheng/react-visible
 | ----------- | ------ | -------- | ------- | ------------------------------------------- |
 | className   | string | false    | -       | The extended className for component.       |
 | value       | bool   | false    | -       | Abstract visible value.                     |
+| destroyable | bool   | false    | false   | If element destroyed when visible to false. |
 | onChange    | func   | false    | noop    | The change handler.                         |
 | onPresent   | func   | false    | noop    | The handler when present.                   |
 | onDismiss   | func   | false    | noop    | The handler when dismiss.                   |
-| destroyable | bool   | false    | false   | If element destroyed when visible to false. |
 
 
 ## usage

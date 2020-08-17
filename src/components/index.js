@@ -22,6 +22,10 @@ export default class ReactVisible extends Component {
      */
     value: PropTypes.bool,
     /**
+     * If element destroyed when visible to false.
+     */
+    destroyable: PropTypes.bool,
+    /**
      * The change handler.
      */
     onChange: PropTypes.func,
@@ -32,11 +36,7 @@ export default class ReactVisible extends Component {
     /**
      * The handler when dismiss.
      */
-    onDismiss: PropTypes.func,
-    /**
-     * If element destroyed when visible to false.
-     */
-    destroyable: PropTypes.bool
+    onDismiss: PropTypes.func
   };
 
   static defaultProps = {
