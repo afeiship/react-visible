@@ -17,15 +17,15 @@ npm update @feizheng/react-visible
 ```
 
 ## properties
-| Name        | Type   | Required | Default | Description                                     |
-| ----------- | ------ | -------- | ------- | ----------------------------------------------- |
-| className   | string | false    | -       | The extended className for component.           |
-| value       | bool   | false    | -       | Abstract visible value.                         |
-| destroyable | bool   | false    | false   | If element destroyed when visible to false.     |
-| rootable    | bool   | false    | false   | If attach the visible element to document root. |
-| onChange    | func   | false    | noop    | The change handler.                             |
-| onPresent   | func   | false    | noop    | The handler when present.                       |
-| onDismiss   | func   | false    | noop    | The handler when dismiss.                       |
+| Name        | Type   | Required | Default | Description                                                    |
+| ----------- | ------ | -------- | ------- | -------------------------------------------------------------- |
+| className   | string | false    | -       | The extended className for component.                          |
+| value       | bool   | false    | -       | Abstract visible value.                                        |
+| destroyable | bool   | false    | false   | If element destroyed when visible to false.                    |
+| rootable    | bool   | false    | false   | If attach the visible element to document root or a container. |
+| onChange    | func   | false    | noop    | The change handler.                                            |
+| onPresent   | func   | false    | noop    | The handler when present.                                      |
+| onDismiss   | func   | false    | noop    | The handler when dismiss.                                      |
 
 
 ## usage

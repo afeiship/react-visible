@@ -27,7 +27,7 @@ export default class ReactVisible extends Component {
      */
     destroyable: PropTypes.bool,
     /**
-     * If attach the visible element to document root.
+     * If attach the visible element to document root or a container.
      */
     rootable: PropTypes.bool,
     /**
