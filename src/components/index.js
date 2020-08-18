@@ -31,7 +31,7 @@ export default class ReactVisible extends Component {
      */
     rootable: PropTypes.bool,
     /**
-     * The change handler.
+     * The handler when visible changed, default is `noop` function, present or dismiss action will trigger.
      */
     onChange: PropTypes.func,
     /**
