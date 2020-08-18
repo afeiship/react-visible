@@ -38,7 +38,7 @@ npm update @feizheng/react-visible
   ```
 2. import js
   ```js
-  import ReactVisible, { Controller, Creator } from '@feizheng/react-visible';
+  import ReactVisible, { Generator } from '@feizheng/react-visible';
   import ReactDOM from 'react-dom';
   import React from 'react';
   import './assets/style.scss';
@@ -77,7 +77,7 @@ npm update @feizheng/react-visible
     };
 
     componentDidMount() {
-      Creator.init(Backdrop, {
+      Generator.init(Backdrop, {
         destroyable: true
       });
     }

@@ -1,4 +1,4 @@
-import ReactVisible, { Controller, Creator } from '../src/main';
+import ReactVisible, { Generator } from '../src/main';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import './assets/style.scss';
@@ -37,7 +37,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    Creator.init(Backdrop, {
+    Generator.init(Backdrop, {
       destroyable: true
     });
   }
