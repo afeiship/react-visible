@@ -38,7 +38,7 @@ npm update @feizheng/react-visible
   ```
 2. import js
   ```js
-  import ReactVisible, { ReactVisibleController } from '@feizheng/react-visible';
+  import ReactVisible, { Controller, Creator } from '@feizheng/react-visible';
   import ReactDOM from 'react-dom';
   import React from 'react';
   import './assets/style.scss';
@@ -48,6 +48,7 @@ npm update @feizheng/react-visible
       const {
         className,
         destroyable,
+        rootable,
         value,
         onPresent,
         onDismiss,
@@ -76,7 +77,7 @@ npm update @feizheng/react-visible
     };
 
     componentDidMount() {
-      this.appBackdrop = new ReactVisibleController(Backdrop, {
+      Creator.init(Backdrop, {
         destroyable: true
       });
     }
@@ -121,7 +122,7 @@ npm update @feizheng/react-visible
           <button
             className="button"
             onClick={(e) => {
-              this.appBackdrop.present(() => {
+              Backdrop.present(() => {
                 console.log('after present!');
               });
             }}>
@@ -131,7 +132,7 @@ npm update @feizheng/react-visible
           <button
             className="button"
             onClick={(e) => {
-              this.appBackdrop.dismiss(() => {
+              Backdrop.dismiss(() => {
                 console.log('after dismiss');
               });
             }}>
