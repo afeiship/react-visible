@@ -8,6 +8,7 @@ class Backdrop extends ReactVisible {
     const {
       className,
       destroyable,
+      rootable,
       value,
       onPresent,
       onDismiss,

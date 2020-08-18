@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@feizheng/noop';
 import ReactAppendToDocument from '@feizheng/react-append-to-document';
+import nxUpdateStateValue from '@feizheng/next-update-state-value';
 
 const CLASS_NAME = 'react-visible';
 const UNDEFINED = 'undefined';
@@ -69,10 +70,18 @@ export default class ReactVisible extends Component {
   }
 
   constructor(inProps) {
-    const { destroyable, value, onPresent, onDismiss, onChange } = inProps;
+    const {
+      destroyable,
+      value,
+      children,
+      onPresent,
+      onDismiss,
+      onChange
+    } = inProps;
     super(inProps);
     this.state = {
       value,
+      children,
       onPresent,
       onDismiss,
       onChange,
@@ -84,13 +93,16 @@ export default class ReactVisible extends Component {
   shouldComponentUpdate(inNextProps) {
     const { value } = inNextProps;
     if (typeof value === UNDEFINED) return true;
-    if (value !== this.state.value) {
-      if (value) {
-        this.setState({ hidden: false });
-        this.updateDestroyValue(value);
+    nxUpdateStateValue(this, 'children', { props: inNextProps });
+    nxUpdateStateValue(this, 'value', {
+      props: inNextProps,
+      callback: (_, val) => {
+        if (val) {
+          this.setState({ hidden: false });
+          this.updateDestroyValue(value);
+        }
       }
-      this.setState({ value });
-    }
+    });
     return true;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-visible",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React component for visible element.",
   "main": "dist/index.js",
   "scripts": {
@@ -72,6 +72,7 @@
     "react-dom": "^16.12.0"
   },
   "dependencies": {
+    "@feizheng/next-update-state-value": "^1.0.0",
     "@feizheng/noop": "^1.0.0",
     "@feizheng/react-append-to-document": "^1.2.0",
     "autoprefixer": "^9.7.4",
