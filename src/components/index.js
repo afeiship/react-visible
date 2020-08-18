@@ -26,6 +26,10 @@ export default class ReactVisible extends Component {
      */
     destroyable: PropTypes.bool,
     /**
+     * If attach the visible element to document root.
+     */
+    rootable: PropTypes.bool,
+    /**
      * The change handler.
      */
     onChange: PropTypes.func,
@@ -43,7 +47,8 @@ export default class ReactVisible extends Component {
     onChange: noop,
     onPresent: noop,
     onDismiss: noop,
-    destroyable: false
+    destroyable: false,
+    rootable: false
   };
 
   static VISIBLE_ROOT_CLASS = VISIBLE_ROOT_CLASS;
@@ -52,6 +57,10 @@ export default class ReactVisible extends Component {
     return ReactAppendToDocument.append(inComponent, inProps, {
       className: VISIBLE_ROOT_CLASS
     });
+  }
+
+  get root() {
+    return document.body;
   }
 
   get visibleElementView() {
@@ -127,7 +136,10 @@ export default class ReactVisible extends Component {
 
   render() {
     const { destroyValue } = this.state;
+    const { rootable } = this.props;
+    const visibleElement = this.visibleElementView;
     if (!destroyValue) return null;
-    return <Fragment>{this.visibleElementView}</Fragment>;
+    if (rootable) return ReactDOM.createPortal(visibleElement, this.root);
+    return <Fragment>{visibleElement}</Fragment>;
   }
 }
