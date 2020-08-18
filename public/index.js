@@ -1,4 +1,4 @@
-import ReactVisible, { ReactVisibleController } from '../src/main';
+import ReactVisible, { Controller, Creator } from '../src/main';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import './assets/style.scss';
@@ -37,7 +37,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.appBackdrop = new ReactVisibleController(Backdrop, {
+    Creator.init(Backdrop, {
       destroyable: true
     });
   }
@@ -82,7 +82,7 @@ class App extends React.Component {
         <button
           className="button"
           onClick={(e) => {
-            this.appBackdrop.present(() => {
+            Backdrop.present(() => {
               console.log('after present!');
             });
           }}>
@@ -92,7 +92,7 @@ class App extends React.Component {
         <button
           className="button"
           onClick={(e) => {
-            this.appBackdrop.dismiss(() => {
+            Backdrop.dismiss(() => {
               console.log('after dismiss');
             });
           }}>

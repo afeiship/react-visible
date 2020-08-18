@@ -1,4 +1,5 @@
 import ReactVisible from './components';
-import ReactVisibleController from './components/controller';
+import Controller from './components/controller';
+import Creator from './components/creator';
 export default ReactVisible;
-export { ReactVisibleController }
+export { Controller, Creator };

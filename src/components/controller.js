@@ -8,6 +8,10 @@ export default class {
     });
   }
 
+  create(inComponent, inProps) {
+    return new this(inComponent, inProps);
+  }
+
   present(inCallback, inOptions) {
     this.component.present(inCallback, inOptions);
   }
