@@ -70,32 +70,32 @@ export default class ReactVisible extends Component {
   }
 
   constructor(inProps) {
-    const {
-      destroyable,
-      value,
-      children,
-      onPresent,
-      onDismiss,
-      onChange
-    } = inProps;
+    const { destroyable, value } = inProps;
     super(inProps);
     this.state = {
-      value,
-      children,
-      onPresent,
-      onDismiss,
-      onChange,
+      ...this.initialState,
       hidden: !value,
       destroyValue: destroyable ? value : true
     };
   }
 
-  shouldComponentUpdate(inNextProps) {
-    const { value } = inNextProps;
+  get initialState() {
+    const { value, children, onPresent, onDismiss, onChange } = this.props;
+    return {
+      value,
+      children,
+      onPresent,
+      onDismiss,
+      onChange
+    };
+  }
+
+  shouldComponentUpdate(inProps) {
+    const { value } = inProps;
     if (typeof value === UNDEFINED) return true;
-    nxUpdateStateValue(this, 'children', { props: inNextProps });
+    nxUpdateStateValue(this, 'children', { props: inProps });
     nxUpdateStateValue(this, 'value', {
-      props: inNextProps,
+      props: inProps,
       callback: (_, val) => {
         if (val) {
           this.setState({ hidden: false });
@@ -109,6 +109,7 @@ export default class ReactVisible extends Component {
   present(inCallback, inOptions) {
     const onPresent = inCallback || this.state.onPresent;
     this.setState({
+      ...this.initialState,
       destroyValue: true,
       hidden: false,
       value: true,
@@ -120,6 +121,7 @@ export default class ReactVisible extends Component {
   dismiss(inCallback, inOptions) {
     const onDismiss = inCallback || this.state.onDismiss;
     this.setState({
+      ...this.initialState,
       value: false,
       onDismiss,
       ...inOptions
