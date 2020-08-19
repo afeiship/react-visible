@@ -121,7 +121,6 @@ export default class ReactVisible extends Component {
   dismiss(inCallback, inOptions) {
     const onDismiss = inCallback || this.state.onDismiss;
     this.setState({
-      ...this.initialState,
       value: false,
       onDismiss,
       ...inOptions
