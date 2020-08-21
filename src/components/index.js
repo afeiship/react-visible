@@ -10,6 +10,16 @@ const CLASS_NAME = 'react-visible';
 const UNDEFINED = 'undefined';
 const VISIBLE_ROOT_CLASS = 'react-visible-root-container';
 
+const parseArgs = (inCallback, inOptions) => {
+  if (!inCallback || typeof inCallback === 'function') {
+    return [inCallback, inOptions];
+  }
+
+  if (inCallback && typeof inCallback === 'object') {
+    return [, inCallback];
+  }
+};
+
 export default class ReactVisible extends Component {
   static displayName = CLASS_NAME;
   static version = '__VERSION__';
@@ -113,23 +123,25 @@ export default class ReactVisible extends Component {
   }
 
   present(inCallback, inOptions) {
-    const onPresent = inCallback || this.state.onPresent;
+    const [callback, options] = parseArgs(inCallback, inOptions);
+    const onPresent = callback || this.state.onPresent;
     this.setState({
       ...this.initialState,
       destroyValue: true,
       hidden: false,
       value: true,
       onPresent,
-      ...inOptions
+      ...options
     });
   }
 
   dismiss(inCallback, inOptions) {
-    const onDismiss = inCallback || this.state.onDismiss;
+    const [callback, options] = parseArgs(inCallback, inOptions);
+    const onDismiss = callback || this.state.onDismiss;
     this.setState({
       value: false,
-      onDismiss,
-      ...inOptions
+      onDismiss
+      // ...options
     });
   }
 
