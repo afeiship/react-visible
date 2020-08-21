@@ -11,13 +11,10 @@ const UNDEFINED = 'undefined';
 const VISIBLE_ROOT_CLASS = 'react-visible-root-container';
 
 const parseArgs = (inCallback, inOptions) => {
-  if (!inCallback || typeof inCallback === 'function') {
+  if (!inCallback || typeof inCallback === 'function')
     return [inCallback, inOptions];
-  }
 
-  if (inCallback && typeof inCallback === 'object') {
-    return [, inCallback];
-  }
+  if (inCallback && typeof inCallback === 'object') return [, inCallback];
 };
 
 export default class ReactVisible extends Component {
