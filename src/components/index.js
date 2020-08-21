@@ -69,16 +69,6 @@ export default class ReactVisible extends Component {
     return null;
   }
 
-  constructor(inProps) {
-    const { destroyable, value } = inProps;
-    super(inProps);
-    this.state = {
-      ...this.initialState,
-      hidden: !value,
-      destroyValue: destroyable ? value : true
-    };
-  }
-
   get initialState() {
     const { value, children, onPresent, onDismiss, onChange } = this.props;
     return {
@@ -87,6 +77,16 @@ export default class ReactVisible extends Component {
       onPresent,
       onDismiss,
       onChange
+    };
+  }
+
+  constructor(inProps) {
+    const { destroyable, value } = inProps;
+    super(inProps);
+    this.state = {
+      ...this.initialState,
+      hidden: !value,
+      destroyValue: destroyable ? value : true
     };
   }
 
