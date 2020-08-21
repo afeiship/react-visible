@@ -9,11 +9,14 @@ export default class {
     const ctrl = new this(inComponent, inProps);
     const target = inIsSingleton ? inComponent : ctrl;
 
-    publicMethods.forEach((item) => {
-      target[item] = function () {
-        ctrl[item].apply(ctrl, arguments);
-      };
-    });
+    inIsSingleton &&
+      publicMethods.forEach(
+        (item) =>
+          (inComponent[item] = function () {
+            ctrl[item].apply(ctrl, arguments);
+          })
+      );
+
     return target;
   }
 
