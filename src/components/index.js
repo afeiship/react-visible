@@ -106,6 +106,12 @@ export default class ReactVisible extends Component {
     return true;
   }
 
+  toggle() {
+    const { value } = this.state;
+    const action = value ? 'dismiss' : 'present';
+    return this[action].apply(this, arguments);
+  }
+
   present(inCallback, inOptions) {
     const onPresent = inCallback || this.state.onPresent;
     this.setState({
@@ -136,11 +142,12 @@ export default class ReactVisible extends Component {
 
   animationEnd() {
     const { value, onPresent, onDismiss, onChange } = this.state;
+    const event = { target: { value } };
     !value && this.setState({ hidden: true });
     this.updateDestroyValue(value);
-    value && onPresent();
-    !value && onDismiss();
-    onChange({ target: { value } });
+    value && onPresent(event);
+    !value && onDismiss(event);
+    onChange(event);
   }
 
   handleAnimationEnd = (inEvent) => {

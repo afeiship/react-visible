@@ -37,9 +37,8 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    Controller.singleton(Backdrop, {
-      destroyable: true
-    });
+    console.log(Controller.createInstance);
+    Controller.createInstance(Backdrop, { destroyable: true }, true);
   }
 
   render() {
@@ -82,21 +81,11 @@ class App extends React.Component {
         <button
           className="button"
           onClick={(e) => {
-            Backdrop.present(() => {
-              console.log('after present!');
+            Backdrop.toggle((e) => {
+              console.log('after present/dismiss!', e);
             });
           }}>
-          App backdrop Show
-        </button>
-
-        <button
-          className="button"
-          onClick={(e) => {
-            Backdrop.dismiss(() => {
-              console.log('after dismiss');
-            });
-          }}>
-          App backdrop Hide
+          Singleton backdrop Toggle
         </button>
       </div>
     );

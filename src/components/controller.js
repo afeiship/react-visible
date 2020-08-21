@@ -3,16 +3,18 @@ import ReactVisible from './index';
 const CTOR = 'constructor';
 
 export default class {
-  static singleton(inComponent, inProps) {
+  static createInstance(inComponent, inProps, inIsSingleton) {
     const methods = Object.getOwnPropertyNames(this.prototype);
     const publicMethods = methods.filter((name) => name !== CTOR);
     const ctrl = new this(inComponent, inProps);
+    const target = inIsSingleton ? inComponent : ctrl;
 
     publicMethods.forEach((item) => {
-      inComponent[item] = function () {
+      target[item] = function () {
         ctrl[item].apply(ctrl, arguments);
       };
     });
+    return target;
   }
 
   constructor(inComponent, inProps) {
@@ -28,6 +30,10 @@ export default class {
 
   dismiss(inCallback, inOptions) {
     this.component.dismiss(inCallback, inOptions);
+  }
+
+  toggle(inCallback, inOptions) {
+    this.component.toggle(inCallback, inOptions);
   }
 
   destroy() {
