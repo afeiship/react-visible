@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-visible",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "React component for visible element.",
   "main": "dist/index.js",
   "scripts": {
@@ -20,7 +20,6 @@
     "react",
     "component"
   ],
-  "types": "types",
   "author": "afei",
   "license": "MIT",
   "browserslist": {
