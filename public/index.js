@@ -1,6 +1,7 @@
-import ReactVisible, { Controller } from '../src/main';
-import ReactDOM from 'react-dom';
+import ReactDemokit from '@jswork/react-demokit';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactVisible, { Controller } from '../src/main';
 import './assets/style.scss';
 
 class Backdrop extends ReactVisible {
@@ -23,7 +24,7 @@ class Backdrop extends ReactVisible {
         hidden={hidden}
         data-visible={this.state.value}
         hidden={hidden}
-        className={`webkit-sassui-backdrop ${className}`}
+        className={`wsui-backdrop ${className}`}
         onAnimationEnd={this.handleAnimationEnd}
         {...props}
       />
@@ -37,13 +38,15 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log(Controller.createInstance);
+    // console.log(Controller.createInstance);
     Controller.createInstance(Backdrop, { destroyable: true }, true);
   }
 
   render() {
     return (
-      <div className="app-container">
+      <ReactDemokit
+        className="p-3 app-container"
+        url="https://github.com/afeiship/react-visible">
         <button
           className="button"
           onClick={(e) => {
@@ -87,7 +90,7 @@ class App extends React.Component {
           }}>
           Singleton backdrop Toggle
         </button>
-      </div>
+      </ReactDemokit>
     );
   }
 }

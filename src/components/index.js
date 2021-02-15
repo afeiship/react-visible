@@ -2,9 +2,9 @@ import React, { Fragment, Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import noop from '@feizheng/noop';
-import ReactAppendToDocument from '@feizheng/react-append-to-document';
-import nxUpdateStateValue from '@feizheng/next-update-state-value';
+import noop from '@jswork/noop';
+import ReactAppendToDocument from '@jswork/react-append-to-document';
+import nxUpdateStateValue from '@jswork/next-update-state-value';
 
 const CLASS_NAME = 'react-visible';
 const UNDEFINED = 'undefined';
@@ -172,3 +172,4 @@ export default class ReactVisible extends Component {
     return <Fragment>{visibleElement}</Fragment>;
   }
 }
+
