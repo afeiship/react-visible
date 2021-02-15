@@ -20,17 +20,13 @@
     "url": "git+https://github.com/afeiship/react-visible.git"
   },
   "keywords": [
-    "boilerplate",
     "react",
-    "component",
-    "cra",
-    "template",
-    "webpack",
-    "sass",
-    "scss",
-    "docs",
-    "service-worker",
-    "sw"
+    "visible",
+    "modal",
+    "dialog",
+    "alert",
+    "confirm",
+    "popup"
   ],
   "author": "afei",
   "license": "MIT",
